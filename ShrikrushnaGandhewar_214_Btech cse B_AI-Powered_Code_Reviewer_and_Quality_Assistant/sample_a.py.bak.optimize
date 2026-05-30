@@ -1,0 +1,217 @@
+"""Sample_a.py module."""
+
+import random
+import time
+
+
+class EmployeeManagementSystem:
+    """EmployeeManagementSystem.
+
+    Attributes:
+        employees: Description of employees.
+    """
+
+    def __init__(self):
+        """Init."""
+        self.employees = []
+
+    def add_employee(self):
+        """Add employee."""
+        total = int(input("Enter number of employees: "))
+
+        for i in range(total):
+
+            print("\nEnter Details for Employee", i + 1)
+
+            employee = {}
+
+            employee["id"] = input("Enter ID: ")
+            employee["name"] = input("Enter Name: ")
+            employee["salary"] = float(input("Enter Salary: "))
+            employee["department"] = input("Enter Department: ")
+
+            self.employees.append(employee)
+
+    def display_employees(self):
+        """Display employees."""
+        if len(self.employees) == 0:
+            print("No employees found")
+            return
+
+        print("\nEmployee Records")
+
+        for i in range(len(self.employees)):
+
+            emp = self.employees[i]
+
+            print("-------------------------")
+            print("Employee Number:", i + 1)
+            print("ID:", emp["id"])
+            print("Name:", emp["name"])
+            print("Salary:", emp["salary"])
+            print("Department:", emp["department"])
+
+    def search_employee(self):
+        """Search employee."""
+        target = input("Enter Employee ID to Search: ")
+
+        found = False
+
+        for i in range(len(self.employees)):
+
+            if self.employees[i]["id"] == target:
+
+                print("\nEmployee Found")
+                print(self.employees[i])
+
+                found = True
+
+        if found == False:
+            print("Employee not found")
+
+    def update_salary(self):
+        """Update salary."""
+        target = input("Enter Employee ID: ")
+
+        for i in range(len(self.employees)):
+
+            if self.employees[i]["id"] == target:
+
+                increment = float(input("Enter Increment Amount: "))
+
+                old_salary = self.employees[i]["salary"]
+
+                new_salary = old_salary + increment
+
+                self.employees[i]["salary"] = new_salary
+
+                print("Salary Updated")
+
+    def remove_duplicate_departments(self):
+        """Remove duplicate departments."""
+        unique_departments = []
+
+        for i in range(len(self.employees)):
+
+            department = self.employees[i]["department"]
+
+            exists = False
+
+            for unique_department in unique_departments:
+
+                if unique_department == department:
+                    exists = True
+
+
+            if exists == False:
+                unique_departments.append(department)
+
+        print("\nUnique Departments")
+
+        for item in unique_departments:
+            print(item)
+
+    def calculate_average_salary(self):
+        """Calculate average salary."""
+        total = 0
+
+        for employee in self.employees:
+
+            total = total + employee["salary"]
+
+        if len(self.employees) == 0:
+            print("No employees available")
+            return
+
+        average = total / len(self.employees)
+
+        print("Average Salary:", average)
+
+    def highest_salary_employee(self):
+        """Highest salary employee."""
+        if len(self.employees) == 0:
+            print("No employees found")
+            return
+
+        highest = self.employees[0]
+
+        for i in range(len(self.employees)):
+
+            if self.employees[i]["salary"] > highest["salary"]:
+
+                highest = self.employees[i]
+
+        print("\nHighest Salary Employee")
+        print(highest)
+
+    def random_bonus_generator(self):
+        """Random bonus generator."""
+        print("\nGenerating Bonuses")
+
+        for i in range(len(self.employees)):
+
+            bonus = random.randint(1000, 10000)
+
+            print(
+                self.employees[i]["name"],
+                "received bonus:",
+                bonus
+            )
+
+            time.sleep(1)
+
+    def bubble_sort_salary(self):
+        """Bubble sort salary."""
+        arr = self.employees[:]
+
+        n = len(arr)
+
+        for i in range(n):
+
+            for j in range(0, n - i - 1):
+
+                if arr[j]["salary"] > arr[j + 1]["salary"]:
+
+                    temp = arr[j]
+
+                    arr[j] = arr[j + 1]
+
+                    arr[j + 1] = temp
+
+        print("\nEmployees Sorted by Salary")
+
+        for emp in arr:
+            print(emp["name"], emp["salary"])
+
+def menu(self):
+    """Menu."""
+    items = [
+        ("1", "Add Employee", self.add_employee),
+        ("2", "Display Employees", self.display_employees),
+        ("3", "Search Employee", self.search_employee),
+        ("4", "Update Salary", self.update_salary),
+        ("5", "Unique Departments", self.remove_duplicate_departments),
+        ("6", "Average Salary", self.calculate_average_salary),
+        ("7", "Highest Salary", self.highest_salary_employee),
+        ("8", "Random Bonus", self.random_bonus_generator),
+        ("9", "Bubble Sort Salary", self.bubble_sort_salary),
+        ("10", "Exit", None),
+    ]
+    options = {key: func for key, _, func in items}
+    menu_text = "\n".join(
+        ["\n========== Employee Management =========="]
+        + [f"{key}. {desc}" for key, desc, _ in items]
+    )
+    while True:
+        print(menu_text)
+        choice = input("Enter Choice: ").strip()
+        if choice == "10":
+            print("Exiting System")
+            break
+        action = options.get(choice)
+        if action is None:
+            print("Invalid Choice")
+            continue
+        action()
+
+

@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class PalindromeCheck {
+
+    public static boolean isPalindrome(String text) {
+        if (text == null || text.isEmpty()) {
+            return true;
+        }
+
+        int left = 0;
+        int right = text.length() - 1;
+
+        text = text.replaceAll("[^a-zA-Z0-9]", "");
+        text = text.toLowerCase();
+        while (left < right) {
+            if (text.charAt(left) != text.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a word: ");
+        String word = sc.nextLine();
+
+        if (isPalindrome(word)) {
+            System.out.println(word + " is a palindrome");
+        } else {
+            System.out.println(word + " is not a palindrome");
+        }
+
+        sc.close();
+    }
+}

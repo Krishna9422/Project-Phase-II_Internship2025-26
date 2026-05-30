@@ -1,0 +1,49 @@
+"""Sample a.py."""
+
+# sample_a.py
+
+def calculate_average(numbers):
+   
+    total = 0
+    for n in numbers:
+        total += n
+    if len(numbers) == 0:
+        return 0
+    return total / len(numbers)
+
+
+def add(a: int, b: int) -> int:
+
+    return a + b
+
+
+def find_max(numbers):
+    """Find max
+
+    Args:
+        numbers: Description of numbers.
+
+    Returns:
+        Description of the return value.
+    """
+    if not numbers:
+        return None
+    max_num = numbers[0]
+    for n in numbers:
+        if n > max_num:
+            max_num = n
+    return max_num
+
+
+def is_even(n):
+    """Is even.
+
+    Args:
+        n: Description of n.
+
+    Returns:
+        Description of the return value.
+    """
+    return n % 2 == 0
+
+
